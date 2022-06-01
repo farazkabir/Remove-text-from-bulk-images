@@ -1,0 +1,7 @@
+keras_ocr,
+opencv,
+numpy
+math,
+time,
+os,
+argparse

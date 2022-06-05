@@ -12,10 +12,12 @@ This script requires the libraires in the requirements.txt to be installed withi
 environment you are running this script in.
 
  
- # How to use:
+ ## How to use:
  
  Install the requirements in the 'requirements.txt' within the Python environment you are running this project in.
+ 
  Run "text_remove.py" if you have the images folder and script in the same directory.
+ 
  Or run it with a command like this,
  python text_remove.py -i 'path/to/images' -o 'path/to/output/' -b 2
  

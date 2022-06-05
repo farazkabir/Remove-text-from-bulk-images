@@ -100,42 +100,32 @@ def inpaint_text(img_paths, pipeline):
     return(images)
 
 
+cwd = os.getcwd()  # Get current directory
+
 parser = argparse.ArgumentParser()
-parser.add_argument('--i', type=str,  help="Input Folder Path")
-parser.add_argument('--o', type=str,  help="Output Folder Path")
-parser.add_argument('--b', type=int,  help="Batch Size")
+parser.add_argument('-i',  type=str, default=os.path.join(cwd,
+                    'images'), help="Input Folder Path")
+parser.add_argument('-o', type=str, default=os.path.join(cwd,
+                    'output'), help="Output Folder Path")
+parser.add_argument('-b', type=int, default=1, help="Batch Size")
 
 
 args = parser.parse_args()
 
-cwd = os.getcwd()  # Get current directory
 
-if args.i == None:
-    folder_path = cwd + '/images/'   # Default input directory
-else:
-    folder_path = args.i
+folder_path = args.i
+output = args.o
 
 
 files = os.listdir(folder_path)
 files.sort()
 
 
-if args.o == None:
-    output = cwd + '/output'  # Default output directory
-else:
-    output = args.o
-
-
 if not os.path.isdir(output):
     os.makedirs(output)
 
 batch_start = 0
-
-
-if args.b == None:
-    batch_end = 1  # Default batch size
-else:
-    batch_end = args.b
+batch_end = args.b
 
 
 err = []
@@ -151,7 +141,7 @@ while True:
         for img in imgs:
 
             img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-            output_img = os.path.join(output, paths[cnt].split('/')[-1])
+            output_img = os.path.join(output, os.path.basename(paths[cnt]))
             cv2.imwrite(output_img, img_rgb)
             cnt += 1
 
